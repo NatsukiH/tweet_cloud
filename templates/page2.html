@@ -1,0 +1,17 @@
+<!DOCTYPE html><html lang="ja">
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+<h1>page2</h1>
+<input type="button" onclick="location.href='/'" value="index">
+<input type="button" onclick="location.href='/page1'" value="page1">
+<input type="button" onclick="location.href='/page2'" value="page2">
+ {% for tweet in tweets %}
+ <hr>
+ <p>{{tweet}} </p>
+ <!-- <p>Like Count is : {{tweet.favorite_count}}  & RT Count is : {{tweet.retweet_count}}</p>
+ <p>Created at : {{tweet.created_at}} </p> -->
+ {% endfor %}
+</body>
+</html>
