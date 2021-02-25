@@ -6,6 +6,9 @@ from flask import Flask, render_template, request
 import datetime
 from tqdm import tqdm
 
+import os
+from os.path import join, dirname
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 # We import our access keys:
@@ -15,10 +18,13 @@ app = Flask(__name__)
 def twitter_setup():
 
     # python で Twitter APIを使用するためのConsumerキー、アクセストークン設定
-    Consumer_key = 'rLR7hXgxncgqoZO8zRC9EmZVw'
-    Consumer_secret = 'I4aGqPNiVvnpbLssdFRLEUhCFKVr9KQZ3jDj8jbLO96TjXDMaZ'
-    Access_token = '976845735969935360-dNTPhOII0Lb2O1qlDYCFAUSPjCE4EXd'
-    Access_secret = 'AME1JZHsBoATojFFKPGYdP1Rks0qqdspCKO5ywiqAAReU'
+    dotenv_path = join(dirname(__file__), '.env')
+    load_dotenv(dotenv_path)
+
+    Consumer_key = os.environ['CONSUMER_KEY']
+    Consumer_secret = os.environ['CONSUMER_SECRET']
+    Access_token = os.environ['ACCESS_TOKEN']
+    Access_secret = os.environ['ACCESS_SECRET']
 
     # 認証
     auth = tweepy.OAuthHandler(Consumer_key, Consumer_secret)
