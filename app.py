@@ -10,6 +10,8 @@ import os
 from os.path import join, dirname
 from dotenv import load_dotenv
 
+import analyze
+
 app = Flask(__name__)
 # We import our access keys:
 # API's setup:
@@ -61,7 +63,8 @@ api = twitter_setup()
 @app.route('/')
 def index():
     tweets_data = get_tweetdata(api, "技育祭 -RT ")
-    return render_template("index.html", tweets=tweets_data)
+    tweets_txt = analyze.mecab_tweet(tweets_data)
+    return render_template("index.html", tweets=tweets_data, tweets_txt=tweets_txt)
 
 
 @app.route('/page1')

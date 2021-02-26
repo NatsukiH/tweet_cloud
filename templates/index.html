@@ -1,17 +1,27 @@
 <!DOCTYPE html><html lang="ja">
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
+
 </head>
 <body>
-<h1>index</h1>
-<input type="button" onclick="location.href='/'" value="index">
-<input type="button" onclick="location.href='/page1'" value="page1">
-<input type="button" onclick="location.href='/page2'" value="page2">
- {% for tweet in tweets %}
- <hr>
- <p>{{tweet}} </p>
- <!-- <p>Like Count is : {{tweet.favorite_count}}  & RT Count is : {{tweet.retweet_count}}</p>
- <p>Created at : {{tweet.created_at}} </p> -->
- {% endfor %}
+    <div id="wordcloud"></div>
+    <h1>index</h1>
+    <input type="button" onclick="location.href='/'" value="index">
+    <input type="button" onclick="location.href='/page1'" value="page1">
+    <input type="button" onclick="location.href='/page2'" value="page2">
+    
+    {% for tweet in tweets %}
+    <hr>
+    <p>{{tweet}} </p>
+    <!-- <p>Like Count is : {{tweet.favorite_count}}  & RT Count is : {{tweet.retweet_count}}</p>
+    <p>Created at : {{tweet.created_at}} </p> -->
+    {% endfor %}
+    <script src="{{url_for('static', filename='wordcloud_d3.js')}}"></script>
+    <script type="text/javascript">
+        var TweetTxt = {{tweets_txt|tojson}}
+        draw_wordcloud(TweetTxt)
+    </script>
 </body>
 </html>
