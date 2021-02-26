@@ -15,10 +15,10 @@ var svg = d3.select("#wordcloud").append("svg")
 function draw_wordcloud(tweets_text){
     var words = sortByFrequency( tweets_text.split(/[ ,.]+/) )
 		.map(function(d,i) {
-			if (30-i*0.1 <= 1){
+			if (100-i*0.1 <= 1){
 				return {text: d, size: 0};
 			}else{
-				return {text: d, size: 30-i*0.1};
+				return {text: d, size: 100-i*0.1};
 			}
         	
         });
@@ -28,23 +28,7 @@ function draw_wordcloud(tweets_text){
         .padding(2)
         .rotate(function() { return ~~(Math.random() * 2) * 90; })
         .fontSize(function (d) { return d.size; }) 
-        .on("end", function draw(words, svg){
-			svg.append("g")
-		//.attr("transform", "translate(" + [bDeltaX, bDeltaY] + ") scale(" + 1 + ")") // nah!
-		.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")") // nah!
-		.selectAll("text")
-		.data(words)
-		.enter().append("text")
-		.style("font-size", function(d) { return d.size + "px"; })
-		.style("font-family", "Impact")
-		.style("fill", function(d, i) { return d3.schemeCategory10[i % 10]; })
-		.attr("text-anchor", "middle")
-		.attr("transform", function(d) {
-			console.log(d.x)
-			return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-		})
-		.text(function(d) { return d.text; });
-		})
+        .on("end", draw(words, svg))
     layout.start();
 }
 

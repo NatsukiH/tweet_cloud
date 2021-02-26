@@ -36,9 +36,13 @@ def mecab_tweet(tweets_data):
             # reader = f.readline()
 
     # wordcloudで出力するフォントを指定
-    font_path = r"C:\WINDOWS\Fonts\HGRGE.TTC"
+    # font_path = r"C:\WINDOWS\Fonts\HGRGE.TTC"
 
-    txt = " ".join(words)
+    stop_words = ['https', '://', '=&', 'する', 'ください', '@', '/',
+                  ';', '。', 'Japan', 'RT', u'説明', u'データ', u'する', u'オラクル', u'日本', u'提供', u'開催', u'お客様']
+    changed_words = [w for w in words if w not in stop_words]
+
+    txt = " ".join(changed_words)
 
     return txt
 
