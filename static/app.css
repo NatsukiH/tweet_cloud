@@ -18,9 +18,10 @@ img{
 }
 
 h1 {
-    width: 250px;
-    background: linear-gradient(transparent 70%, #A4DEDF 70%);
+    /* width: 700px;
+    background: linear-gradient(transparent 70%, #A4DEDF 70%); */
     margin: 5vh auto;
+    font-weight: bold;
 }
 
 svg{

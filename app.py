@@ -66,28 +66,28 @@ def index():
 
 @app.route('/page0')
 def page0():
-    tweets_data = get_tweetdata(api, "技育祭 -RT ")
+    tweets_data = get_tweetdata(api, "#技育祭 -RT ")
     tweets_txt = analyze.mecab_tweet(tweets_data)
     return render_template("page0.html", tweets=tweets_data, tweets_txt=tweets_txt)
 
 
 @app.route('/page1')
 def page1():
-    tweets_data = get_tweetdata(api, "エンジニア -RT ")
+    tweets_data = get_tweetdata(api, "#ウインターハッカソン -RT ")
     tweets_txt = analyze.mecab_tweet(tweets_data)
     return render_template("page1.html", tweets=tweets_data, tweets_txt=tweets_txt)
 
 
 @app.route('/page2')
 def page2():
-    tweets_data = get_tweetdata(api, "競プロ -RT ")
+    tweets_data = get_tweetdata(api, "#駆け出しエンジニアと繋がりたい -RT ")
     tweets_txt = analyze.mecab_tweet(tweets_data)
     return render_template("page2.html", tweets=tweets_data, tweets_txt=tweets_txt)
 
 
 @app.route('/page3')
 def page3():
-    tweets_data = get_tweetdata(api, "機械学習 -RT ")
+    tweets_data = get_tweetdata(api, "#プログラミング -RT ")
     tweets_txt = analyze.mecab_tweet(tweets_data)
     return render_template("page3.html", tweets=tweets_data, tweets_txt=tweets_txt)
 
