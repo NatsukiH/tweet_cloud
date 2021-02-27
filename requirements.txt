@@ -13,8 +13,9 @@ Flask==1.1.2
 numpy==1.19.4
 pandas==1.1.4
 tqdm==4.54.1
-mccabe==0.6.1
-mecab-python-windows==0.996.3
+# mccabe==0.6.1
+# mecab-python-windows==0.996.3
+mecab-python3
 matplotlib==3.3.3
 matplotlib-venn==0.11.6
 wordcloud==1.8.1
