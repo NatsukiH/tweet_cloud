@@ -37,10 +37,10 @@
 
         var words = sortByFrequency(tweets_txt.split(/[ ,.]+/) )
             .map(function(d,i) {
-                if (50-i*0.1 <= 1){
+                if (35-i*0.1 <= 1){
                     return {text: d, size: 0};
                 }else{
-                    return {text: d, size: 50-i*0.1};
+                    return {text: d, size: 35-i*0.1};
                 }
                 
             });

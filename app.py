@@ -1,4 +1,3 @@
-# from credentials import *    # This will allow us to use the keys as variables
 import tweepy           # To consume Twitter's API
 import pandas as pd     # To handle data
 import numpy as np      # For number computing
@@ -70,13 +69,15 @@ def index():
 @app.route('/page1')
 def page1():
     tweets_data = get_tweetdata(api, "キンプリ -RT ")
-    return render_template("page1.html", tweets=tweets_data)
+    tweets_txt = analyze.mecab_tweet(tweets_data)
+    return render_template("page1.html", tweets=tweets_data, tweets_txt=tweets_txt)
 
 
 @app.route('/page2')
 def page2():
     tweets_data = get_tweetdata(api, "King&Prince -RT ")
-    return render_template("page2.html", tweets=tweets_data)
+    tweets_txt = analyze.mecab_tweet(tweets_data)
+    return render_template("page2.html", tweets=tweets_data, tweets_txt=tweets_txt)
 
 
 if __name__ == '__main__':

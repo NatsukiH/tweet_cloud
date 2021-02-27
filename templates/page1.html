@@ -1,17 +1,82 @@
 <!DOCTYPE html><html lang="ja">
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
+    <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="static/d3.layout.cloud.js"></script>
 </head>
 <body>
-<h1>page1</h1>
-<input type="button" onclick="location.href='/'" value="index">
-<input type="button" onclick="location.href='/page1'" value="page1">
-<input type="button" onclick="location.href='/page2'" value="page2">
- {% for tweet in tweets %}
- <hr>
- <p>{{tweet}} </p>
- <!-- <p>Like Count is : {{tweet.favorite_count}}  & RT Count is : {{tweet.retweet_count}}</p>
- <p>Created at : {{tweet.created_at}} </p> -->
- {% endfor %}
+    <h1>page1</h1>
+    <input type="button" onclick="location.href='/'" value="index">
+    <input type="button" onclick="location.href='/page1'" value="page1">
+    <input type="button" onclick="location.href='/page2'" value="page2">
+    <div id="wordcloud"></div>
+    {% for tweet in tweets %}
+    <hr>
+    <p>{{tweet}} </p>
+
+    {% endfor %}
+    <!-- <script src="{{url_for('static', filename='d3.layout.cloud.js')}}"></script> -->
+    <!-- <script type="text/javascript" src="static/d3.layout.cloud.js"></script> -->
+    <script type="text/javascript">
+    
+        var tweets_txt = {{tweets_txt|tojson}}
+        // グラフの表示設定
+        var margin = { top: 10, right: 10, bottom: 10, left: 10 },
+            width = 450 - margin.left - margin.right,
+            height = 300 - margin.top - margin.bottom;
+
+        // svgオブジェクトの追加
+        var svg = d3.select("#wordcloud").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+
+        var words = sortByFrequency(tweets_txt.split(/[ ,.]+/) )
+            .map(function(d,i) {
+                if (35-i*0.1 <= 1){
+                    return {text: d, size: 0};
+                }else{
+                    return {text: d, size: 35-i*0.1};
+                }
+                
+            });
+
+        var layout = d3.layout.cloud()
+            .size([width, height])
+            .words(words)
+            .padding(2)
+            .rotate(function() { return ~~(Math.random() * 2) * 90; })
+            .fontSize(function (d) { return d.size; }) 
+            .on("end", draw)
+        layout.start();
+
+        function draw(Words) {
+            svg.append("g")
+                //.attr("transform", "translate(" + [bDeltaX, bDeltaY] + ") scale(" + 1 + ")") // nah!
+                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")") // nah!
+                .selectAll("text")
+                .data(Words)
+                .enter().append("text")
+                .style("font-size", function(d) { return d.size + "px"; })
+                .style("fill", function(d, i) { return d3.schemeCategory10[i % 10]; })
+                .attr("text-anchor", "middle")
+                .style("font-family", "Impact")
+                .attr("transform", function(d) {
+                    // console.log(d.rotate)
+                    return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                })
+                .text(function(d) { return d.text; });
+        };
+
+        function sortByFrequency(arr) {
+            var f = {};
+            arr.forEach(function(i) { f[i] = 0; });
+            var u = arr.filter(function(i) { return ++f[i] == 1; });
+            return u.sort(function(a, b) { return f[b] - f[a]; });
+        }
+    </script>
 </body>
 </html>
