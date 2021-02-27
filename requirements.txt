@@ -15,7 +15,7 @@ pandas==1.1.4
 tqdm==4.54.1
 # mccabe==0.6.1
 # mecab-python-windows==0.996.3
-mecab-python3
+mecab-python3==0.996.5
 matplotlib==3.3.3
 matplotlib-venn==0.11.6
 wordcloud==1.8.1
