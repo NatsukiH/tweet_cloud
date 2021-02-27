@@ -19,3 +19,4 @@ mecab-python3
 matplotlib==3.3.3
 matplotlib-venn==0.11.6
 wordcloud==1.8.1
+python-dotenv==0.15.0
