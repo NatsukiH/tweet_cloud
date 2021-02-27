@@ -26,80 +26,26 @@
     <a onclick="location.href='/page2'" class="btn-sticky">#RoomB</a>
     <a onclick="location.href='/page3'" class="btn-sticky">#RoomC</a>
 
-    <div id="wordcloud"></div>
 
-    <div class="container">
-        <div class="row">
-        {% for tweet in tweets %}
-                <div class="card col-sm-6">
-                    <div class="card-body">
-                        {{tweet}}
-                    </div>
-                </div>
-        {% endfor %}
-        </div>
+
+    <div class="box">
+            <h4>ついくらうどNOWとは</h4>
+                <p>このアプリは、指定した単語が含まれるツイート直近20件を抽出し、<br>
+                    WordCloudにしたものと抽出したテキストを表示するアプリです。</p>
+    </div>
+    <div class="box">
+            <h4>技育祭verとは</h4>
+            <p>技育祭verということで、技育祭中は各Roomに関するツイートを<br>リアルタイムでのぞき見することができます。</p>
+            <p> 見たい講演が被ってしまっても、被った講演の状況をボタン一つで確認できます。</p>
+            <p>※技育祭が始まるまではRoomA、RoomB、RoomCに該当するツイートが取得できないため、<br>
+                代わりに「エンジニア」「競プロ」「機械学習」で検索できるようになっています。<br>
+                （技育祭が始まると元に戻します）</p>
+
     </div>
 
-    <script type="text/javascript">
-    
-        var tweets_txt = {{tweets_txt|tojson}}
-        // グラフの表示設定
-        var margin = { top: 10, right: 10, bottom: 10, left: 10 },
-            width = 450 - margin.left - margin.right,
-            height = 300 - margin.top - margin.bottom;
+    <footer>
+        <p>© Nastuki Hashimoto 2021</p>
+    </footer>
 
-        // svgオブジェクトの追加
-        var svg = d3.select("#wordcloud").append("svg")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform",
-                    "translate(" + margin.left + "," + margin.top + ")");
-
-
-        var words = sortByFrequency(tweets_txt.split(/[ ,.]+/) )
-            .map(function(d,i) {
-                if (35-i*0.1 <= 1){
-                    return {text: d, size: 0};
-                }else{
-                    return {text: d, size: 35-i*0.1};
-                }
-                
-            });
-
-        var layout = d3.layout.cloud()
-            .size([width, height])
-            .words(words)
-            .padding(2)
-            .rotate(function() { return ~~(Math.random() * 2) * 90; })
-            .fontSize(function (d) { return d.size; }) 
-            .on("end", draw)
-        layout.start();
-
-        function draw(Words) {
-            svg.append("g")
-                //.attr("transform", "translate(" + [bDeltaX, bDeltaY] + ") scale(" + 1 + ")") // nah!
-                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")") // nah!
-                .selectAll("text")
-                .data(Words)
-                .enter().append("text")
-                .style("font-size", function(d) { return d.size + "px"; })
-                .style("fill", function(d, i) { return d3.schemeCategory10[i % 10]; })
-                .attr("text-anchor", "middle")
-                .style("font-family", "Impact")
-                .attr("transform", function(d) {
-                    // console.log(d.rotate)
-                    return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-                })
-                .text(function(d) { return d.text; });
-        };
-
-        function sortByFrequency(arr) {
-            var f = {};
-            arr.forEach(function(i) { f[i] = 0; });
-            var u = arr.filter(function(i) { return ++f[i] == 1; });
-            return u.sort(function(a, b) { return f[b] - f[a]; });
-        }
-    </script>
 </body>
 </html>
