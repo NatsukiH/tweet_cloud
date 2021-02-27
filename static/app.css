@@ -48,6 +48,10 @@ svg{
     transform: translateY(2px);
   }
 
+.card{
+    border: solid #6F68C7 0.1em;
+}
+
 .box{
     background-color: #A4DEDF;
     color: #7A5F58;
