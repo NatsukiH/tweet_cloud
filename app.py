@@ -66,6 +66,13 @@ def index():
     return render_template("index.html", tweets=tweets_data, tweets_txt=tweets_txt)
 
 
+@app.route('/page0')
+def page0():
+    tweets_data = get_tweetdata(api, "技育祭 -RT ")
+    tweets_txt = analyze.mecab_tweet(tweets_data)
+    return render_template("page0.html", tweets=tweets_data, tweets_txt=tweets_txt)
+
+
 @app.route('/page1')
 def page1():
     tweets_data = get_tweetdata(api, "キンプリ -RT ")
@@ -78,6 +85,13 @@ def page2():
     tweets_data = get_tweetdata(api, "King&Prince -RT ")
     tweets_txt = analyze.mecab_tweet(tweets_data)
     return render_template("page2.html", tweets=tweets_data, tweets_txt=tweets_txt)
+
+
+@app.route('/page3')
+def page3():
+    tweets_data = get_tweetdata(api, "Python -RT ")
+    tweets_txt = analyze.mecab_tweet(tweets_data)
+    return render_template("page3.html", tweets=tweets_data, tweets_txt=tweets_txt)
 
 
 if __name__ == '__main__':
