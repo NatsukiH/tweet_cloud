@@ -46,7 +46,7 @@ def get_tweetdata(api, keyword):
     for tweet in tqdm(tweepy.Cursor(api.search, q=q, tweet_mode='extended', lang='ja', result_type="recent").items(20)):
 
         # つぶやき時間がUTCのため、JSTに変換  ※デバック用のコード
-        #jsttime = tweet.created_at + datetime.timedelta(hours=9)
+        # jsttime = tweet.created_at + datetime.timedelta(hours=9)
         # print(jsttime)
 
         # つぶやきテキスト(FULL)を取得
@@ -59,37 +59,45 @@ def get_tweetdata(api, keyword):
 api = twitter_setup()
 
 
-@app.route('/')
-def index():
+@app.route('/', methods=['GET'])
+def get():
     return render_template("index.html")
 
 
-@app.route('/page0')
-def page0():
+@app.route('/', methods=['POST'])
+def post():
+    query = request.form.get('query')
+    tweets_data = get_tweetdata(api, query)
+    tweets_txt = analyze.mecab_tweet(tweets_data)
+    return render_template('result.html', title=query, tweets=tweets_data, tweets_txt=tweets_txt)
+
+
+@app.route('/giikusai')
+def giikusai():
     tweets_data = get_tweetdata(api, "#技育祭")
     tweets_txt = analyze.mecab_tweet(tweets_data)
-    return render_template("page0.html", tweets=tweets_data, tweets_txt=tweets_txt)
+    return render_template("result.html", title="#技育祭", tweets=tweets_data, tweets_txt=tweets_txt)
 
 
-@app.route('/page1')
-def page1():
+@app.route('/rooma')
+def rooma():
     tweets_data = get_tweetdata(api, "#駆け出しエンジニアと繋がりたい")
     tweets_txt = analyze.mecab_tweet(tweets_data)
-    return render_template("page1.html", tweets=tweets_data, tweets_txt=tweets_txt)
+    return render_template("result.html", title="#駆け出しエンジニアと繋がりたい", tweets=tweets_data, tweets_txt=tweets_txt)
 
 
-@app.route('/page2')
-def page2():
+@app.route('/roomb')
+def roomb():
     tweets_data = get_tweetdata(api, "#22卒")
     tweets_txt = analyze.mecab_tweet(tweets_data)
-    return render_template("page2.html", tweets=tweets_data, tweets_txt=tweets_txt)
+    return render_template("result.html", title="#22卒", tweets=tweets_data, tweets_txt=tweets_txt)
 
 
-@app.route('/page3')
-def page3():
+@app.route('/roomc')
+def roomc():
     tweets_data = get_tweetdata(api, "#23卒")
     tweets_txt = analyze.mecab_tweet(tweets_data)
-    return render_template("page3.html", tweets=tweets_data, tweets_txt=tweets_txt)
+    return render_template("result.html", title="#23卒", tweets=tweets_data, tweets_txt=tweets_txt)
 
 
 if __name__ == '__main__':
