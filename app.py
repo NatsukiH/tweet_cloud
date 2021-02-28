@@ -43,7 +43,7 @@ def get_tweetdata(api, keyword):
     # つぶやきを格納するリスト
     tweets_data = []
     # カーソルを使用してデータ取得
-    for tweet in tqdm(tweepy.Cursor(api.search, q=q, count=100, tweet_mode='extended', lang='ja').items(20)):
+    for tweet in tqdm(tweepy.Cursor(api.search, q=q, tweet_mode='extended', lang='ja', result_type="recent").items(20)):
 
         # つぶやき時間がUTCのため、JSTに変換  ※デバック用のコード
         #jsttime = tweet.created_at + datetime.timedelta(hours=9)
@@ -66,28 +66,28 @@ def index():
 
 @app.route('/page0')
 def page0():
-    tweets_data = get_tweetdata(api, "#技育祭 -RT ")
+    tweets_data = get_tweetdata(api, "#技育祭")
     tweets_txt = analyze.mecab_tweet(tweets_data)
     return render_template("page0.html", tweets=tweets_data, tweets_txt=tweets_txt)
 
 
 @app.route('/page1')
 def page1():
-    tweets_data = get_tweetdata(api, "#ウインターハッカソン -RT ")
+    tweets_data = get_tweetdata(api, "#駆け出しエンジニアと繋がりたい")
     tweets_txt = analyze.mecab_tweet(tweets_data)
     return render_template("page1.html", tweets=tweets_data, tweets_txt=tweets_txt)
 
 
 @app.route('/page2')
 def page2():
-    tweets_data = get_tweetdata(api, "#駆け出しエンジニアと繋がりたい -RT ")
+    tweets_data = get_tweetdata(api, "#22卒")
     tweets_txt = analyze.mecab_tweet(tweets_data)
     return render_template("page2.html", tweets=tweets_data, tweets_txt=tweets_txt)
 
 
 @app.route('/page3')
 def page3():
-    tweets_data = get_tweetdata(api, "#プログラミング -RT ")
+    tweets_data = get_tweetdata(api, "#23卒")
     tweets_txt = analyze.mecab_tweet(tweets_data)
     return render_template("page3.html", tweets=tweets_data, tweets_txt=tweets_txt)
 
