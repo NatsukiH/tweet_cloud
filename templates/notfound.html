@@ -21,6 +21,7 @@
         <img src="static/logo.png" alt="ついくらうどNOWのロゴ" height="150" onclick="location.href='/'">
         </div>
     </header>
+
     <a onclick="location.href='/'" class="btn-sticky">HOME</a>
     <a onclick="location.href='/giikusai'" class="btn-sticky">#技育祭</a>
     <a onclick="location.href='/rooma'" class="btn-sticky">#RoomA</a>
@@ -32,26 +33,9 @@
         <input type="submit" value="&#xf002">
     </form>
 
-    <h1>- HOME -</h1>
+    <h1>- {{title}} -</h1>
 
-    <div class="box">
-            <h4>ついくらうどNOW</h4>
-                <p>このアプリは、指定したハッシュタグが含まれるツイート20件を抽出し、<br>
-                    WordCloudにしたものと抽出したテキストを表示するアプリです。</p>
-                <p>遡ることができるのは1週間までです。</p>
-    </div>
-    <div class="box">
-            <h4>技育祭ver</h4>
-            <p>技育祭とは「技術者を育てる」ことを目的としたエンジニアを目指す学生のための<br>
-                日本最大のテックカンファレンスです。詳細は<a href="https://talent.supporterz.jp/geeksai/2021/">こちら</a></p>
-            <p>技育祭verということで、技育祭中は各Roomに関するツイートを<br>リアルタイムでのぞき見することができます。</p>
-            <p> 見たい講演が被ってしまっても、被った講演の状況をボタン一つで確認できます。</p>
-            <p>※技育祭が始まるまでは#RoomA、#RoomB、#RoomCに該当するツイートが取得できないため、<br>
-                代わりにそれぞれ「#駆け出しエンジニアと繋がりたい」「#22卒」「#23卒」<br>
-                で検索した結果を表示させています。</p>
-            <p> （技育祭が始まると各Roomで検索できるよう戻します）</p>
-
-    </div>
+    <h5>該当のツイートは見つかりませんでした。</h5>
 
     <footer>
         <p>© Nastuki Hashimoto 2021</p>

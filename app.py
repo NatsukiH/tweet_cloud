@@ -67,9 +67,16 @@ def get():
 @app.route('/', methods=['POST'])
 def post():
     query = request.form.get('query')
-    tweets_data = get_tweetdata(api, query)
-    tweets_txt = analyze.mecab_tweet(tweets_data)
-    return render_template('result.html', title=query, tweets=tweets_data, tweets_txt=tweets_txt)
+
+    if query == "":
+        return render_template("index.html")
+    else:
+        tweets_data = get_tweetdata(api, query)
+        tweets_txt = analyze.mecab_tweet(tweets_data)
+        if tweets_txt == "":
+            return render_template('notfound.html', title=query)
+        else:
+            return render_template('result.html', title=query, tweets=tweets_data, tweets_txt=tweets_txt)
 
 
 @app.route('/giikusai')

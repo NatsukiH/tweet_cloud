@@ -21,12 +21,12 @@ img{
 h1 {
     /* width: 700px;
     background: linear-gradient(transparent 70%, #A4DEDF 70%); */
-    margin: 5vh auto;
+    margin: 5vh 2vh auto ;
     font-weight: bold;
 }
 
 svg{
-    margin: auto;
+    margin: 0 auto 2vh auto;
 }
 
 .btn-sticky {
@@ -75,4 +75,36 @@ svg{
 h4{
     text-shadow: 1px 1px 2px silver;
     font-weight: bold;
+}
+
+h5{
+    margin: 10vh auto;
+}
+
+
+/* --------検索フォーム--------- */
+.search_container{
+  box-sizing: border-box;
+}
+.search_container input[type="text"]{
+  border: 2px solid #6F68C7;
+  padding: 3px 20px;
+  border-radius: 20px;
+  height: 2.0em;
+  width: 245px;
+  overflow: hidden;
+}
+.search_container input[type="text"]:focus {
+  outline: 0;
+}
+.search_container input[type="submit"]{
+  cursor: pointer;
+  font-family: FontAwesome;
+  font-size: 1.3em;
+  border: none;
+  background: none;
+  color: #6F68C7;
+  outline : none;
+  display: inline-block;
+  vertical-align: middle;
 }
