@@ -81,30 +81,42 @@ def post():
 
 @app.route('/giikusai')
 def giikusai():
-    tweets_data = get_tweetdata(api, "#技育祭")
+    tweets_data = get_tweetdata(api, "#技育祭 -RT")
     tweets_txt = analyze.mecab_tweet(tweets_data)
     return render_template("result.html", title="#技育祭", tweets=tweets_data, tweets_txt=tweets_txt)
 
 
-@app.route('/rooma')
+@app.route('/halla')
 def rooma():
-    tweets_data = get_tweetdata(api, "#駆け出しエンジニアと繋がりたい")
+    tweets_data = get_tweetdata(api, "#ホールA -RT")
     tweets_txt = analyze.mecab_tweet(tweets_data)
-    return render_template("result.html", title="#駆け出しエンジニアと繋がりたい", tweets=tweets_data, tweets_txt=tweets_txt)
+    if tweets_txt == "":
+        return render_template('notfound.html', title="#ホールA")
+    else:
+        return render_template("result.html", title="#ホールA", tweets=tweets_data, tweets_txt=tweets_txt)
+    # return render_template("result.html", title="#ホールA", tweets=tweets_data, tweets_txt=tweets_txt)
 
 
-@app.route('/roomb')
+@app.route('/hallb')
 def roomb():
-    tweets_data = get_tweetdata(api, "#22卒")
+    tweets_data = get_tweetdata(api, "#ホールB -RT")
     tweets_txt = analyze.mecab_tweet(tweets_data)
-    return render_template("result.html", title="#22卒", tweets=tweets_data, tweets_txt=tweets_txt)
+    if tweets_txt == "":
+        return render_template('notfound.html', title="#ホールB")
+    else:
+        return render_template("result.html", title="#ホールB", tweets=tweets_data, tweets_txt=tweets_txt)
+    # return render_template("result.html", title="#ホールB", tweets=tweets_data, tweets_txt=tweets_txt)
 
 
-@app.route('/roomc')
+@app.route('/hallc')
 def roomc():
-    tweets_data = get_tweetdata(api, "#23卒")
+    tweets_data = get_tweetdata(api, "#ホールC -RT")
     tweets_txt = analyze.mecab_tweet(tweets_data)
-    return render_template("result.html", title="#23卒", tweets=tweets_data, tweets_txt=tweets_txt)
+    if tweets_txt == "":
+        return render_template('notfound.html', title="#ホールC")
+    else:
+        return render_template("result.html", title="#ホールC", tweets=tweets_data, tweets_txt=tweets_txt)
+    # return render_template("result.html", title="#ホールC", tweets=tweets_data, tweets_txt=tweets_txt)
 
 
 if __name__ == '__main__':
