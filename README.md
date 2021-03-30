@@ -17,4 +17,5 @@
 ・Flask(Python)，D3.js，MeCab
 
 # その他リンク
+発表資料：https://docs.google.com/presentation/d/1wXUX-UTri69jCA_oG5shsWIKsHgLz6SOLZfJ8HBZo4k/edit#slide=id.p  
 ブログは後日書きます．
