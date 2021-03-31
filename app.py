@@ -88,12 +88,12 @@ def giikusai():
 
 @app.route('/halla')
 def rooma():
-    tweets_data = get_tweetdata(api, "#ホールA -RT")
+    tweets_data = get_tweetdata(api, "#23卒 -RT")
     tweets_txt = analyze.mecab_tweet(tweets_data)
     if tweets_txt == "":
-        return render_template('notfound.html', title="#ホールA")
+        return render_template('notfound.html', title="#23卒")
     else:
-        return render_template("result.html", title="#ホールA", tweets=tweets_data, tweets_txt=tweets_txt)
+        return render_template("result.html", title="#23卒", tweets=tweets_data, tweets_txt=tweets_txt)
     # return render_template("result.html", title="#ホールA", tweets=tweets_data, tweets_txt=tweets_txt)
 
 
